@@ -8,5 +8,4 @@
 
 ### Problems to fix
 - [ ] If the user inputs an unequal length of the pad and message, it throws an error
-- [x] whitespace_positions and capitalized_positions can have same indexes in them because of the trimming
-  * Comment: Indexes are fixed, but when adding back spaces and capitals, **first add spaces, then capitals**
+- [ ] Make it more interactive, maybe refactor

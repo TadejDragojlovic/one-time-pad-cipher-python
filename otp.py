@@ -1,5 +1,5 @@
 from secrets import choice # Used to to generate truly random values
-from string import ascii_lowercase
+from string import ascii_lowercase # Lowercase alphabet
 
 class OTP:
     def __init__(self, message):
