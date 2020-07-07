@@ -1,45 +1,48 @@
 from secrets import choice # Used to to generate truly random values
+from string import ascii_lowercase
 
 class OTP:
-    def __init__(self, message, pad):
+    def __init__(self, message):
         self.message = message
-        self.pad = pad
+        self.pad = "".join([choice(ascii_lowercase) for x in range(len(message))])
         self.whitespace_positions = []
         self.capitalized_positions = []
-
-        for i, char in enumerate(self.message): # Save positions of capital letters for later
-            if char.isupper():
-                self.capitalized_positions.append(i)
-
+        self.has_whitespace = False
         self.message = self.message.lower()
-        self.pad = self.pad.lower()
 
         if self.message.find(" ")>0:
+            self.has_whitespace = True
             for i, char in enumerate(self.message):
                 if char == " ":
-                    self.whitespace_positions.append(i)
-                    # Used to save space positions, so that later when decrypting the message, spaces can be added back
-                    self.message = self.message.replace(" ", "") # Delete the spaces
-                    
-        # /////// ADD LATER IF NEW TRIMMED MESSAGE IS NOT EQUAL TO PAD IN LENGTH, THROW AN ERROR //////////
+                    self.message = self.message.replace(" ", "") # Delete the spaces if there are any
+
+        # /////// ADD AN ERROR IF LENGTH ISN'T EQUAL //////////
 
     def encrypt(self):
         ciphertext = ""
         for i, char in enumerate(self.message):
-            curr = (ord(char)-96)+(ord(self.pad[i])-96)
+            curr = (ord(char)-97)+(ord(self.pad[i])-96)
             if curr > 26:
                 curr %= 26
-            curr -= 1
             ciphertext += chr(curr+96)
 
         return ciphertext
 
     def decrypt(self):
-        pass
+        decipheredtext = ""
+        for i, char in enumerate(self.encrypt()):
+            curr = (ord(char)-96)-(ord(self.pad[i])-96)
+            if curr > 26 or curr < 0:
+                curr %= 26
+            curr += 1
+            decipheredtext += chr(curr+96)
+        return decipheredtext
 
 if __name__ == "__main__":
-    otp = OTP('Hello World', 'ABCDEFGHIJ')
+    otp = OTP('This is a test')
 
-    ciphertext = otp.encrypt()
-    print(ciphertext)
-    # print(otp.decrypt())
+    print("\n")
+    print(f"THIS IS THE SECRET PAD {otp.pad}")
+    print(otp.encrypt())
+    print(otp.decrypt())
+    print("\n")
