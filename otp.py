@@ -20,8 +20,7 @@ class OTP:
                     self.whitespace_positions.append(i)
                     # Used to save space positions, so that later when decrypting the message, spaces can be added back
                     self.message = self.message.replace(" ", "") # Delete the spaces
-
-        print(self.message)
+                    
         # /////// ADD LATER IF NEW TRIMMED MESSAGE IS NOT EQUAL TO PAD IN LENGTH, THROW AN ERROR //////////
 
     def encrypt(self):
