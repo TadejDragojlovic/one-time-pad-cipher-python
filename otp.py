@@ -7,10 +7,6 @@ class OTP:
         self.whitespace_positions = []
         self.capitalized_positions = []
 
-        "Hello World"
-        "ABCDE FGHIJ"
-
-
         for i, char in enumerate(self.message): # Save positions of capital letters for later
             if char.isupper():
                 self.capitalized_positions.append(i)
