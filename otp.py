@@ -30,7 +30,6 @@ class OTP:
 
     def encrypt(self):
         ciphertext = ""
-
         for i, char in enumerate(self.message):
             curr = (ord(char)-96)+(ord(self.pad[i])-96)
             if curr > 26:
